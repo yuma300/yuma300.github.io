@@ -1,3 +1,1 @@
-window.onload = function(){
-    setTimeout(function() { throw new Error("this is from out site js file."); }, 0);
-}
+setTimeout(function() { throw new Error("this is from out site js file."); }, 0);
