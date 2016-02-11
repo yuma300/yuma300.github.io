@@ -34,6 +34,11 @@
           $scope.results.push({playCounter: playCounter, dice1: dice1, dice2: dice2, dice3: dice3});
           $scope.playCounter++;
         };
+
+
+        $scope.ondel = function(index) {
+          $scope.results.splice(($scope.results.length - 1) - index, 1);
+        }
       });
     </script>
   </head>
@@ -54,7 +59,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-xs-4 col-sm-4 col-md-4 text-center">
           <div class="radio" ng-repeat="item in prefs">
             <label>
               <input type="radio" ng-model="data.selectedDice1"
@@ -64,7 +69,7 @@
           </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-xs-4 col-sm-4 col-md-4 text-center">
           <div class="radio" ng-repeat="item in prefs">
             <label>
               <input type="radio" ng-model="data.selectedDice2"
@@ -74,7 +79,7 @@
           </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-xs-4 col-sm-4 col-md-4 text-center">
           <div class="radio" ng-repeat="item in prefs">
             <label>
               <input type="radio" ng-model="data.selectedDice3"
@@ -87,7 +92,7 @@
       </div>
       <div class="row">
         <div class="col-lg-12">
-          <button ng-click="onclick()" class="btn btn-primary">Submit</button>
+          <button ng-click="onclick()" class="btn btn-primary" style="width:100%;">Submit</button>
         </div>
       </div>
       <div class="row">
@@ -96,18 +101,18 @@
           <table class="table table-striped table-hover ">
             <thead>
               <tr>
-                <th>Play Count</th>
-                <th>Column heading</th>
-                <th>Column heading</th>
-                <th>Column heading</th>
+                <th>Dice 1</th>
+                <th>Dice 2</th>
+                <th>Dice 3</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="item in results  | orderBy:'playCounter':true">
-                <td>{{item.playCounter}}</td>
                 <td><img ng-src="./assets/dice/dice{{item.dice1}}.png"/></td>
                 <td><img ng-src="./assets/dice/dice{{item.dice2}}.png"/></td>
                 <td><img ng-src="./assets/dice/dice{{item.dice3}}.png"/></td>
+                <td ng-click="ondel($index)"><img ng-src="./assets/del.png" style="margin-top:8px;"/></td>
               </tr>
             </tbody>
           </table> 
