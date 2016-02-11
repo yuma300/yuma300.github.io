@@ -27,7 +27,11 @@
 	$scope.results = [];
         $scope.playCounter = 0;
         $scope.onclick = function() {
-          $scope.results.push($scope.playCounter);
+          dice1 = $scope.data.selectedDice1;
+          dice2 = $scope.data.selectedDice2;
+          dice3 = $scope.data.selectedDice3;
+          playCounter = $scope.playCounter
+          $scope.results.push({playCounter: playCounter, dice1: dice1, dice2: dice2, dice3: dice3});
           $scope.playCounter++;
         };
       });
@@ -92,18 +96,18 @@
           <table class="table table-striped table-hover ">
             <thead>
               <tr>
-                <th>#</th>
+                <th>Play Count</th>
                 <th>Column heading</th>
                 <th>Column heading</th>
                 <th>Column heading</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="item in results">
-                <td>#</td>
-                <td>Column content</td>
-                <td>Column content</td>
-                <td>Column content</td>
+              <tr ng-repeat="item in results  | orderBy:'playCounter':true">
+                <td>{{item.playCounter}}</td>
+                <td><img ng-src="./assets/dice/dice{{item.dice1}}.png"/></td>
+                <td><img ng-src="./assets/dice/dice{{item.dice2}}.png"/></td>
+                <td><img ng-src="./assets/dice/dice{{item.dice3}}.png"/></td>
               </tr>
             </tbody>
           </table> 
