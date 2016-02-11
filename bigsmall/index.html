@@ -28,21 +28,27 @@
 	$scope.results = [];
         $scope.playCounter = 0;
         $scope.onclick = function() {
-          dice1 = Number($scope.data.selectedDice1);
-          dice2 = Number($scope.data.selectedDice2);
-          dice3 = Number($scope.data.selectedDice3);
+          dice = new Array(Number($scope.data.selectedDice1), Number($scope.data.selectedDice2), Number($scope.data.selectedDice3));
           playCounter = $scope.playCounter
+          // Sorting Dices
+          dice.sort(function(a, b) {
+            return (parseInt(a) < parseInt(b)) ? 1 : -1;
+          });
+          
           cssclass = "";
-          if (dice1 === dice2 && dice1 === dice3 && dice2 === dice3) {
+          if (dice[0] === dice[1] && dice[0] === dice[2] && dice[1] === dice[2]) {
+            // all same value
             cssclass =  'active';
           } else {
-            if (dice1 + dice2 + dice3 > 10) {
+            if (dice[0] + dice[1] + dice[2] > 10) {
+              // big
               cssclass =  'success';
             } else {
+              // small
               cssclass =  'danger';
             }
           }
-          $scope.results.push({playCounter: playCounter, dice1: dice1, dice2: dice2, dice3: dice3, cssclass: cssclass});
+          $scope.results.push({playCounter: playCounter, dice1: dice[0], dice2: dice[1], dice3: dice[2], cssclass: cssclass});
           $scope.playCounter++;
         };
 
@@ -131,7 +137,7 @@
         <div class="row">
           <div class="col-lg-12">
             <font size=4>
-             BigSmall Analizer Ver 1.0.0<br>
+             BigSmall Analizer Ver 1.1.0<br>
              Developed by びっとぶりっと
             </font>
           </div>
